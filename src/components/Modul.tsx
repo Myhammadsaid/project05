@@ -1,11 +1,15 @@
-import React from 'react'
+import { FC } from 'react'
 import { IoCloseOutline } from 'react-icons/io5'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { removeFromCart } from '../context/slices/cartSlice'
 
-const Modul = ({ setCartToggle }) => {
-	const carts = useSelector(state => state.cart.value)
+interface IsetCartModul {
+	setCartToggle: (toggle: boolean) => void
+	carts: any[]
+}
+
+const Modul: FC<IsetCartModul> = ({ setCartToggle, carts }) => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 

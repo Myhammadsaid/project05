@@ -1,10 +1,10 @@
-import React from 'react'
+import { FC } from 'react'
 import { BsCart } from 'react-icons/bs'
 import { useDispatch } from 'react-redux'
 import { useGetProductsQuery } from '../context/api/productApi'
 import { addToCart } from '../context/slices/cartSlice'
 
-const Products = () => {
+const Products: FC = () => {
 	const { data } = useGetProductsQuery({ params: { limit: 4 } })
 	const dispatch = useDispatch()
 

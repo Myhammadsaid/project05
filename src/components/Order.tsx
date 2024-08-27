@@ -1,7 +1,7 @@
-import React from 'react'
+import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const Order = () => {
+const Order: FC = () => {
 	const navigate = useNavigate()
 	return (
 		<>

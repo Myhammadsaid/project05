@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import { FC, useState } from 'react'
 import { BsCart } from 'react-icons/bs'
+import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import Modul from './Modul'
 
-const Header = () => {
-	const [cartToggle, setCartToggle] = useState(false)
+const Header: FC = () => {
+	const carts = useSelector(state => state.cart.value)
+	const [cartToggle, setCartToggle] = useState<boolean>(false)
 	const { pathname } = useLocation()
 
 	if (pathname === '/order') return <></>
@@ -24,7 +26,11 @@ const Header = () => {
 					</nav>
 				</div>
 			</header>
-			{cartToggle ? <Modul setCartToggle={setCartToggle} /> : <></>}
+			{cartToggle ? (
+				<Modul carts={carts} setCartToggle={setCartToggle} />
+			) : (
+				<></>
+			)}
 		</>
 	)
 }

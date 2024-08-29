@@ -11,24 +11,25 @@ const baseQuery = fetchBaseQuery({
 	},
 })
 
-const baseQueryWithRetry = retry(baseQuery, { maxRetries: 3 })
+const customBaseQueryWithRetry: typeof baseQuery = retry(
+	async (args, api, extraOptions) => {
+		const result = await baseQuery(args, api, extraOptions)
 
-const customBaseQuery: typeof baseQuery = async (args, api, extraOptions) => {
-	const result = await baseQuery(args, api, extraOptions)
-
-	if (result.error) {
-		const { status } = result.error
-		if (status === 401 || status === 403) {
-			console.error('Unauthorized access - Redirecting to login...')
+		if (result.error) {
+			const { status } = result.error
+			if (status === 401 || status === 403) {
+				console.error('Unauthorized access - Redirecting to login...')
+			}
 		}
-	}
 
-	return result
-}
+		return result
+	},
+	{ maxRetries: 3 }
+)
 
 export const api = createApi({
 	reducerPath: 'myApi',
-	baseQuery: customBaseQuery,
+	baseQuery: customBaseQueryWithRetry,
 	tagTypes: ['Product'],
 	endpoints: () => ({}),
 })

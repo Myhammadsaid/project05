@@ -28,7 +28,7 @@ const customBaseQuery: typeof baseQuery = async (args, api, extraOptions) => {
 
 export const api = createApi({
 	reducerPath: 'myApi',
-	baseQuery: baseQueryWithRetry,
+	baseQuery: customBaseQuery,
 	tagTypes: ['Product'],
 	endpoints: () => ({}),
 })

@@ -5,11 +5,11 @@ import { useLocation } from 'react-router-dom'
 import Modul from './Modul'
 
 const Header: FC = () => {
-	const carts = useSelector(state => state.cart.value)
+	const carts = useSelector((state: any) => state.cart.value)
 	const [cartToggle, setCartToggle] = useState<boolean>(false)
 	const { pathname } = useLocation()
 
-	if (pathname === '/order') return <></>
+	if (pathname === '/order') return null
 
 	return (
 		<>
@@ -19,18 +19,14 @@ const Header: FC = () => {
 						<h1 className='text-3xl'>All Products</h1>
 						<button
 							onClick={() => setCartToggle(!cartToggle)}
-							className='cursor-pointer rounded-[50%] text-xl bg-green-600 p-3 text-white'
+							className='cursor-pointer rounded-full text-xl bg-green-600 p-3 text-white'
 						>
 							<BsCart />
 						</button>
 					</nav>
 				</div>
 			</header>
-			{cartToggle ? (
-				<Modul carts={carts} setCartToggle={setCartToggle} />
-			) : (
-				<></>
-			)}
+			{cartToggle && <Modul carts={carts} setCartToggle={setCartToggle} />}
 		</>
 	)
 }

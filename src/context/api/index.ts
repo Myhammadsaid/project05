@@ -24,7 +24,7 @@ const customBaseQueryWithRetry: typeof baseQuery = retry(
 
 		return result
 	},
-	{ maxRetries: 3 }
+	{ maxRetries: 1 }
 )
 
 export const api = createApi({
